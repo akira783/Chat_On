@@ -8,12 +8,18 @@
     android:padding="10dp"
     tools:context="akira.fr.chat_on.DiscussionActivity">
 
+    <!---
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_sms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/ligne_activity_discussion" />
+-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_discussion"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/detail_activity_discussion" />
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/messages"
+ />
 
-
-</LinearLayout>
+    </LinearLayout>
