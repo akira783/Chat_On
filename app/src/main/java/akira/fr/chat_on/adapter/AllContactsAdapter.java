@@ -37,7 +37,7 @@ public class AllContactsAdapter extends RecyclerView.Adapter<AllContactsAdapter.
     @Override
     public void onBindViewHolder(ContactViewHolder holder, final int position) {
         ContactVO contactVO = contactVOList.get(position);
-       // holder.ivContactImage.setImageURI(contactVO.getContactImage());
+        holder.ivContactImage.setImageBitmap(contactVO.getPhoto());
         holder.tvContactName.setText(contactVO.getContactName());
         holder.tvPhoneNumber.setText(contactVO.getContactNumber());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -20,7 +20,7 @@ import akira.fr.chat_on.model.ContactVO;
 
 
 public class ContactActivity extends AppCompatActivity {
-
+    private String id;
     RecyclerView rvContacts;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     @Override
@@ -114,4 +114,5 @@ public class ContactActivity extends AppCompatActivity {
             // permissions this app might request
         }
     }
+
 }
