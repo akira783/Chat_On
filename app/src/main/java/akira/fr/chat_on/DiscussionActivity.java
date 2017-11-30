@@ -2,21 +2,27 @@ package akira.fr.chat_on;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+import android.view.View;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class DiscussionActivity extends AppCompatActivity {
+
+
+public class DiscussionActivity extends AppCompatActivity implements OnItemClickListener {
 
     ArrayList<String> smsMessagesList = new ArrayList<>();
     ListView messages;
@@ -45,6 +51,8 @@ public class DiscussionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discussion);
 
         messages = (ListView) findViewById(R.id.messages);
+
+        messages.setOnItemClickListener(DiscussionActivity.this);
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, smsMessagesList);
         messages.setAdapter(arrayAdapter);
@@ -82,12 +90,17 @@ public class DiscussionActivity extends AppCompatActivity {
     private void getPermissionToReadSMS() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT>=23){
             if (shouldShowRequestPermissionRationale(
                     Manifest.permission.READ_SMS)) {
                 Toast.makeText(this, "Please allow permission!", Toast.LENGTH_SHORT).show();
             }
             requestPermissions(new String[]{Manifest.permission.READ_SMS},
                     READ_SMS_PERMISSIONS_REQUEST);
+            }
+            else{
+
+            }
         }
     }
     @Override
@@ -117,4 +130,18 @@ public class DiscussionActivity extends AppCompatActivity {
         active = false;
     }
 
+    //messages.setOnItemClickListener (new AdapterView.OnItemClickListener()
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Intent sendIntent = new Intent(android.content.Intent.ACTION_VIEW);
+        //sendIntent.putExtra(Uri.parse("sms_address"));
+
+        startActivity(sendIntent);
+
+        Toast.makeText(DiscussionActivity.this, "Vous avez cliquez sur un item", Toast.LENGTH_SHORT).show();
+    }
 }
