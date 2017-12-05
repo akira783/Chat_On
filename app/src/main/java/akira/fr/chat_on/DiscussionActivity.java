@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class DiscussionActivity extends AppCompatActivity {
 
+    public DiscussionActivity(){}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

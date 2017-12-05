@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Chat_On</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="contact_fragment">Contacts</string>
+    <string name="appel_fragment">Appel</string>
+    <string name="sms_fragment">SMS</string>
 </resources>

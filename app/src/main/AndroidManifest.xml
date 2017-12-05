@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".AppelActivity">
+        <activity android:name=".MainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
             <category android:name="android.intent.category.LAUNCHER" />
@@ -25,7 +25,7 @@
         <activity android:name=".ContactActivity"
             android:theme="@style/Contact"
             />
-        <activity android:name=".MainActivity"
+        <activity android:name=".AppelActivity"
             />
 
     </application>

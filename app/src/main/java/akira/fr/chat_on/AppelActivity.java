@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class AppelActivity extends AppCompatActivity {
     Cursor cursor ;
     ArrayList<LogAppel> arr ;
 
+    public AppelActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,8 @@ public class AppelActivity extends AppCompatActivity {
             System.out.println(" "+ arr);
             LogAppelTask logAppelTask = new LogAppelTask(AppelActivity.this);
             logAppelTask.execute();
-
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -69,7 +69,7 @@ public class AppelActivity extends AppCompatActivity {
         cursor = getBaseContext().getContentResolver().query(Uri.parse("content://call_log/calls"), null, null, null, null);
 
         /*System.out.println("cursour "+ cursor.getColumnCount());
-       for (int i=0;i<cursor.getColumnCount();i++) {
+        for (int i=0;i<cursor.getColumnCount();i++) {
             System.out.println(" " + i +" "+ cursor.getColumnName(i));
         }*/
 
@@ -79,6 +79,7 @@ public class AppelActivity extends AppCompatActivity {
         int type_id = cursor.getColumnIndex("type");
         int date_id = cursor.getColumnIndex("date");
 
+
         while (cursor.moveToNext()) {
 
             String name = cursor.getString(name_id);
@@ -87,7 +88,6 @@ public class AppelActivity extends AppCompatActivity {
             String duration = cursor.getString(duration_id);
             String date = cursor.getString(date_id);
 
-
             int id = Integer.parseInt(type);
 
             String stype = "";
@@ -95,32 +95,27 @@ public class AppelActivity extends AppCompatActivity {
             switch (id) {
                 case CallLog.Calls.OUTGOING_TYPE:
                     stype = "Sortant";
-                    System.out.println(" "+ type);
+                    //System.out.println(" "+ type);
                     break;
-
                 case CallLog.Calls.INCOMING_TYPE:
                     stype = "Entrant";
-                    System.out.println(" "+ type);
+                    //System.out.println(" "+ type);
                     break;
-
                 case CallLog.Calls.MISSED_TYPE:
                     stype = "Absence";
-                    System.out.println(" "+ type);
+                    //System.out.println(" "+ type);
                     break;
             }
-
             if (phone != null) {
                 arr.add(new LogAppel(phone, stype, name, duration, date));
             }else{
                 arr.add(new LogAppel(phone, stype, "Anonyme", duration, date));
             }
         }
-
         cursor.close();
         return arr;
 
     }
-
 
     public class LogAppelTask extends AsyncTask<ArrayList<LogAppel>, Void, ArrayList<LogAppel>>{
 
@@ -139,7 +134,6 @@ public class AppelActivity extends AppCompatActivity {
             progDailog.setCancelable(false);
             progDailog.setMessage("Rechargement ...");
             progDailog.show();
-
         }
 
         @Override
